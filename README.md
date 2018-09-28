@@ -53,6 +53,11 @@ wbw.getWallpapers(params).then(wallpaperJSON => {
   console.log('got humanizeWallpapers data - Array', wbw.humanizeWallpapers(wallpaperJSON))
   console.log('got humanizeWallpapers data - Object', wbw.humanizeWallpapers(wallpaperJSON[0]))
 })
+
+// get today wallpaper story
+wbw.getTodayWallpaperStory(todayWallpaperStory => {
+    console.log('todayWallpaperStory', todayWallpaperStory)
+})
 ```
 
 ### API
