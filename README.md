@@ -25,6 +25,7 @@
 ### 实例
 
 [example.js](https://github.com/surmon-china/wonderful-bing-wallpaper/blob/master/examples/index.js)
+
 [onLine site - example](https://surmon.me)
 
 ### 怎么用
@@ -128,4 +129,8 @@ npm run dev
 npm run test
 ```
 
+
+### Author
+
+[Surmon](https://surmon.me)
 
