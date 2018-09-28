@@ -1,94 +1,69 @@
-const Netease = require('../dist/netease.js')
-const netease = new Netease()
+/*
+ * @file Example of wonderful-bing-wallpaper
+ * @author Surmon <https://github.com/surmon-china>
+ */
 
-const errorLogs = []
-const successLogs = []
+const WonderfulBingWallpaper = require('../src/bing')
+const xml2js = require('xml2js')
 
-function printLog() {
-  if ((errorLogs.length + successLogs.length) >= 9) {
-    console.log('成功：' + successLogs.length + '!', successLogs)
-    console.log('失败：' + errorLogs.length + '!', errorLogs)
-  }
-}
-
-function consolelog(log) {
-  console.log(log)
-  printLog()
-}
-
-function consolewarn(log) {
-  console.warn(log)
-  printLog()
-}
-
-netease.search('一人饮酒醉').then(data => {
-  successLogs.push({ name: '歌曲搜索', data })
-  consolelog('歌曲搜索成功')
-}).catch(error => {
-  errorLogs.push({ name: '歌曲搜索', error })
-  consolewarn('歌曲地址', error)
+const resolutions = WonderfulBingWallpaper.resolutions
+const wbw = new WonderfulBingWallpaper({
+  size: 8,
+  day: 7,
+  resolution: resolutions[2],  
+  host: 'cn.bing.com',
+  local: 'zh-cn'
 })
 
-netease.playlist('751387161').then(data => {
-  successLogs.push({ name: '歌单1', data })
-  consolelog('歌单1成功')
-}).catch(error => {
-  errorLogs.push({ name: '歌单1', error })
-  consolewarn('歌曲地址', error)
+console.log('wallPaper', wbw)
+console.log('\nwallPaper resolutions', resolutions, resolutions[3])
+
+// today wallpaper story
+wbw.getTodayWallpaperStory().then(todayWallpaperStory => {
+  console.group('todayWallpaperStory')
+  console.log('got todayWallpaperStory', todayWallpaperStory)
+  console.groupEnd()
 })
 
-netease._playlist('751387161').then(data => {
-  successLogs.push({ name: '歌单2', data })
-  consolelog('歌单2成功')
-}).catch(error => {
-  errorLogs.push({ name: '歌单2', error })
-  consolewarn('歌曲地址', error)
+// default json
+wbw.getWallpapers().then(wallpaperJSON => {
+  console.group('wallpaperJSON-1')
+  console.log('got wallpaperJSON-1 data', wallpaperJSON)
+  console.log(`\ngot wallpaperJSON-1 humanizeWallpapers data :url = ${resolutions[2]}\n`, wbw.humanizeWallpapers(wallpaperJSON))
+  console.log(`\ngot wallpaperJSON-1 humanizeWallpapers data :url = ${resolutions[3]}\n`, wbw.humanizeWallpapers(wallpaperJSON, resolutions[3]))
+  console.log(`\ngot wallpaperJSON-1[0] humanizeWallpapers data :url = ${resolutions[2]}\n`, wbw.humanizeWallpapers(wallpaperJSON[0]))
+  console.log(`\ngot wallpaperJSON-1[0] humanizeWallpapers data :url = ${resolutions[5]}\n`, wbw.humanizeWallpapers(wallpaperJSON[0], resolutions[5]))
+  console.groupEnd()
 })
 
-netease.picture('19124905253588326', 400).then(data => {
-  successLogs.push({ name: '图片地址', data })
-  consolelog('图片地址成功')
-}).catch(error => {
-  errorLogs.push({ name: '图片地址', error })
-  consolewarn('歌曲地址', error)
+// params json
+wbw.getWallpapers({ size: 10, day: 2 }).then(wallpaperJSON => {
+  console.group('wallpaperJSON-2')
+  console.log('got wallpaperJSON-2 data', wallpaperJSON)
+  console.log('got wallpaperJSON-2 humanizeWallpapers data', wbw.humanizeWallpapers(wallpaperJSON))
+  console.log('got wallpaperJSON-2[0] humanizeWallpapers data\n', wbw.humanizeWallpapers(wallpaperJSON[0]))
+  console.groupEnd()
 })
 
-netease.artist('4130').then(data => {
-  successLogs.push({ name: '艺术家', data })
-  consolelog('艺术家成功')
-}).catch(error => {
-  errorLogs.push({ name: '艺术家', error })
-  consolewarn('歌曲地址', error)
+// xml
+wbw.getWallpapers({ format: 'xml' }).then(wallpaperXML => {
+  console.group('wallpaperXML')
+  console.debug('got wallpaperXML data\n', wallpaperXML)
+  xml2js.parseString(wallpaperXML, (err, result) => {
+    console.log('wallpaperXML', result)
+  })
+  console.groupEnd()
 })
 
-netease.album('35327877').then(data => {
-  successLogs.push({ name: '唱片', data })
-  consolelog('唱片成功')
-}).catch(error => {
-  errorLogs.push({ name: '唱片', error })
-  consolewarn('歌曲地址', error)
-})
+// setOptions
+wbw.setOptions({ size: 3 })
 
-netease.lyric('411356994').then(data => {
-  successLogs.push({ name: '歌词', data })
-  consolelog('歌词成功')
-}).catch(error => {
-  errorLogs.push({ name: '歌词', error })
-  consolewarn('歌曲地址', error)
-})
-
-netease.url('405253742').then(data => {
-  successLogs.push({ name: '歌曲地址', data })
-  consolelog('歌曲地址成功')
-}).catch(error => {
-  errorLogs.push({ name: '歌曲地址', error })
-  consolewarn('歌曲地址', error)
-})
-
-netease.song('411356994').then(data => {
-  successLogs.push({ name: '歌曲详情', data })
-  consolelog('歌曲详情成功')
-}).catch(error => {
-  errorLogs.push({ name: '歌曲详情', error })
-  consolewarn('歌曲地址', error)
+// rss
+wbw.getWallpapers({ format: 'rss' }).then(wallpaperRSS => {
+  console.group('wallpaperRSS')
+  console.debug('got wallpaperRSS data\n', wallpaperRSS)
+  xml2js.parseString(wallpaperRSS, (err, result) => {
+    console.log('wallpaperRSS', result)
+  })
+  console.groupEnd()
 })

@@ -12,10 +12,10 @@
 
 ### wonderful-bing-wallpaper
 
-🌅A simple bing daily wallpaper api lib. 极致简洁的 Node.js 版必应壁纸 API 库。
+🌅A simple bing daily wallpaper api lib. 极简的 Node.js 版必应壁纸 API 库。
 
-- 简单：1个接口
-- 稳定：Bing 不挂库不挂
+- 简单：1 个接口
+- 稳定：与 Bing 同在
 - 轻巧：不依赖任何第三方
 
 ### 贡献者
@@ -29,16 +29,97 @@ npm i wonderful-bing-wallpaper --save
 ```
 
 ```javascript
-const wbda = require('wonderful-bing-wallpaper')
+// require
+const WonderfulBingWallpaper = require('wonderful-bing-wallpaper')
 
-// wbda()
+// get support resolutions list
+const resolutions = WonderfulBingWallpaper.resolutions
+
+// instance
+const wbw = new WonderfulBingWallpaper(options)
+
+// update default options
+wbw.setOptions(options)
+
+// get daily wallpapers
+wbw.getWallpapers(params).then(wallpaperJSON => {
+  console.log('got wallpaperJSON data', wallpaperJSON)
+  console.log('got humanizeWallpapers data - Array', wbw.humanizeWallpapers(wallpaperJSON))
+  console.log('got humanizeWallpapers data - Object', wbw.humanizeWallpapers(wallpaperJSON[0]))
+})
 ```
+
+### API
+
+#### `new WonderfulBingWallpaper(options: object)` and `wba.setOptions(options: object)`
+
+##### return
+
+@return WonderfulBingWallpaper instance
+
+##### options
+
+**recommended option field（推荐设置的字段）**
+
+|params|type|required|default|desc|
+|:----:|:--:|:------:|:-----:|----|
+|size  |`Number`|false|`1`| how many images - 几张图片 `size <= 8`|
+|day   |`Number`|false|`0`| how days before - 往前推几天 `day <= 7`|
+|format|`String`|false|`js`| result data format - 返回数据的格式 `js | xml | ssr` |
+|local |`String`|false|`en-US`| your location - 你想拿到什么语言的版本（国内 `zh-CN`）|
+
+**not recommended option field（非必要情况不要设置的字段）**
+
+|params|type|required|default|desc|
+|:----:|:--:|:------:|:-----:|----|
+|host  |`String`|false|`www.bing.com`| bing wallpaper api host <br> 你想在哪个服务器拿数据（国内 `cn.bing.com`）|
+|wallpaperApi|`String`|false|`/HPImageArchive.aspx`| bing wallpaper api path <br> 如果哪天 Bing 改接口了你可以手动设置一下|
+|storyApi|`String`|false|`/cnhp/coverstory/`| bing wallpaper story api path <br>  今日壁纸故事 API，只能获取今天|
+|resolution|`String`|false|`1920x1200`| `humanizeWallpapers` second param default resolution <br> 使用 `humanizeWallpapers` 方法时第二参数的默认值|
+
+---
+
+#### `wba.getWallpapers(params: object)`
+
+##### return
+
+@return wallpaper array
+
+##### params
+
+the same as [Options - recommended option field](/#Options)
+
+---
+
+#### `wba.humanizeWallpapers(wallPapers: object | array, resolution: string)`
+
+##### return
+
+@return wallpaper array
+
+##### params
+
+|params|type|required|default|desc|
+|:----:|:--:|:------:|:-----:|----|
+|wallPapers|`Array/Object`|true|`null`| wallpaper images <br> 图片或多张图片|
+|resolution|`String`|false|`{instance}.options.resolution`| wallpaper resolution <br> 要输出的图片地址里的分辨率|
+
+---
+
+#### `wba.getTodayWallpaperStory(): object`
+
+##### return
+
+@return wallpaper story object
+
+---
 
 ### 测试执行
 
 ```
+npm i
+npm run dev
 npm run test
-npm run example
 ```
 
 

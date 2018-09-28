@@ -1,27 +1,42 @@
+/*
+ * @file Mocha test of wonderful-bing-wallpaper
+ * @author Surmon <https://github.com/surmon-china>
+ */
 
-// Mocha Test
-const netease = require('../src/netease')
+const WonderfulBingWallpaper = require('../dist/bing')
+const xml2js = require('xml2js')
 const expect = require('chai').expect
-const nm = new netease()
 
-describe('测试网易云接口', () => {
-  it('测试搜索接口', done => {
-    nm.search('一人饮酒独醉')
-      .then(data => {
-        expect(data).not.to.be.empty
-        expect(data.result.songs[0].name).to.equal('一人饮酒醉')
-        done()
-      })
-      .catch(err => {
-        done(err)
-      })
+const resolutions = WonderfulBingWallpaper.resolutions
+const wbw = new WonderfulBingWallpaper({
+  size: 8,
+  day: 7,
+  resolution: resolutions[2],  
+  host: 'cn.bing.com',
+  local: 'zh-cn'
+})
+
+describe('Test Class WonderfulBingWallpaper', () => {
+  
+  it('test instance', () => {
+    expect(wbw instanceof WonderfulBingWallpaper).to.equal(true)
+    expect(wbw.options.host).to.equal('cn.bing.com')
+    expect(wbw.options.local).to.equal('zh-cn')
+    expect(wbw.options.day).to.equal(7)
   })
 
-  it('测试歌单1', done => {
-    nm.playlist('751387161')
+  it('test resolutions', () => {
+    expect(resolutions.length).to.equal(14)
+    expect(resolutions[6]).to.equal('800x480')
+  })
+
+  it('test getTodayWallpaperStory', done => {
+    wbw.getTodayWallpaperStory()
       .then(data => {
-        expect(data).not.to.be.empty
-        expect(data.playlist.trackIds.length).to.be.equal(22)
+        const keys = Object.keys(data)
+        expect(keys.includes('title')).to.equal(true)
+        expect(keys.includes('Longitude')).to.equal(true)
+        expect(keys.includes('date')).to.equal(true)
         done()
       })
       .catch(e => {
@@ -29,23 +44,11 @@ describe('测试网易云接口', () => {
       })
   })
 
-  it('测试歌单2', done => {
-    nm._playlist('751387161')
+  it('test getWallpapers', done => {
+    wbw.getWallpapers()
       .then(data => {
-        expect(data).not.to.be.empty
-        expect(data.playlist.trackIds.length).to.be.equal(22)
-        done()
-      })
-      .catch(e => {
-        done(e)
-      })
-  })
-
-  it('测试获取图片', done => {
-    nm.picture('3388694837506899', 300)
-      .then(data => {
-        expect(data).not.to.be.empty
-        expect(data.url.slice(11, data.url.length)).to.be.equal('music.126.net/br3IrdCvT7-GjCyUVNONiA==/3388694837506899.jpg?param=300y300')
+        expect(data.length).to.equal(8)
+        expect(data[0].url.indexOf('.jpg') > -1).to.be.equal(true)
         done()
       })
       .catch(err => {
@@ -53,11 +56,12 @@ describe('测试网易云接口', () => {
       })
   })
 
-  it('测试获取歌词', done => {
-    nm.lyric('411356994')
+  it('test params getWallpapers', done => {
+    wbw.getWallpapers({ size: 10, day: 2 })
       .then(data => {
-        expect(data).not.to.be.empty
-        expect(data.lrc.lyric).not.to.be.empty
+        expect(data.length).to.equal(8)
+        expect(data[0].url.indexOf('.jpg') > -1).to.be.equal(true)
+        expect(data[0].quiz.indexOf('/search') === 0).to.be.equal(true)
         done()
       })
       .catch(err => {
@@ -65,49 +69,37 @@ describe('测试网易云接口', () => {
       })
   })
 
-  it('测试歌曲详情', done => {
-    nm.song('411356994')
-      .then(data => {
-        expect(data).not.to.be.empty
-        expect(data.songs[0].name).to.be.equal('火葬场之歌')
-        done()
+  it('test getWallpapers format', done => {
+    wbw.getWallpapers({ format: 'xml' })
+      .then(wallpaperXML => {
+        xml2js.parseString(wallpaperXML, (err, wallpaperXMLJSON) => {
+          expect(wallpaperXML).not.to.be.empty
+          expect(wallpaperXMLJSON).not.to.be.empty
+          expect(Object.keys(wallpaperXMLJSON.images).includes('tooltips')).to.be.equal(true)
+          expect(wallpaperXMLJSON.images.image.length === 8).to.be.equal(true)
+          expect(wallpaperXMLJSON.images.image[0].copyright[0]).not.to.be.empty
+          done()
+        })
       })
       .catch(err => {
         done(err)
       })
   })
 
-  it('测试获取唱片', done => {
-    nm.album('35327877')
-      .then(data => {
-        expect(data).not.to.be.empty
-        expect(data.album.blurPicUrl.slice(10, data.album.blurPicUrl.length)).to.be.equal(`music.126.net/4mUKGD6wyIW0XpTWXiFcdQ==/19124905253588326.jpg`)
-        done()
-      })
-      .catch(e => {
-        done(e)
-      })
+  it('test setOptions', () => {
+    wbw.setOptions({ size: 3 })
+    expect(wbw.options.size).to.equal(3)
   })
 
-  it('测试获取播放地址', done => {
-    nm.url('33894312')
+  it('test rss format and options merge', done => {
+    wbw.getWallpapers({ format: 'rss' })
       .then(data => {
-        expect(data).not.to.be.empty
-        expect(data.data[0].id).to.be.equal(33894312)
-        done()
-      })
-      .catch(e => {
-        done(e)
-      })
-  })
-
-  it('测试获取歌手信息', done => {
-    nm.artist('4130')
-      .then(data => {
-        expect(data).not.to.be.empty
-        expect(data.code).to.be.equal(200)
-        expect(data.artist.name).to.be.equal('李玉刚')
-        done()
+        xml2js.parseString(data, (err, wallpaperXMLJSON) => {
+          expect(wallpaperXMLJSON.rss.channel.length).to.equal(1)
+          expect(wallpaperXMLJSON.rss.channel[0].link[0] === 'http://bing.com/HPImageArchive.aspx?format=rss').to.equal(true)
+          expect(wallpaperXMLJSON.rss.channel[0].item.length).to.equal(3)
+          done()
+        })
       })
       .catch(e => {
         done(e)

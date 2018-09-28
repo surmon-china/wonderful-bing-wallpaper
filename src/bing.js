@@ -1,21 +1,20 @@
 /*
- * @file main of wonderful-bing-wallpaper
+ * @file Main of wonderful-bing-wallpaper
  * @author Surmon <https://github.com/surmon-china>
  */
  
 const https = require('https')
 const querystring = require('querystring')
 
-/** Class representing a point. */
+/** Class WonderfulBingWallpaper. */
 class WonderfulBingWallpaper {
 
   /**
-   * Create a wbdw instance.
+   * Create a wbw instance.
    * @param {object} options - The instance options.
    */
   constructor(options = {}) {
     this.setOptions(options)
-    return this
   }
 
   /**
@@ -26,52 +25,72 @@ class WonderfulBingWallpaper {
     if (this.options) {
       this.options = Object.assign(this.options, options)
     } else {
-      this.options = Object.assign({}, DEFAULT_CONFIG, options)
+      this.options = Object.assign({}, DEFAULT_OPTIONS, options)
     }
     return this
   }
 
   /**
+   * Get daily wallpapers story.
+   */
+  getTodayWallpaperStory() {
+    return new Promise((resolve, reject) => {
+      const request = https.request({
+        port: 443,
+        method: 'GET',
+        host: this.options.host,
+        path: this.options.storyApi
+      }, res => {
+        if (res.statusCode < 200 || res.statusCode >= 300) {
+          return reject(new Error('statusCode=' + res.statusCode))
+        }
+        let body = []
+        res.on('data', data => { body.push(data) })
+        res.on('end', () => resolve(JSON.parse(Buffer.concat(body).toString())))
+      })
+      request.on('error', reject)
+      request.end()
+    })
+  }
+
+  /**
    * Get the wallpapers by params.
-   * @param {params} n - wallpapers size.
-   * @param {params} idx - Before days.
-   * @param {params} mkt - The location.
+   * @param {params} size - wallpapers size.
+   * @param {params} day - Before days.
+   * @param {params} local - The location.
    * @param {params} format - The result doc format.
    */
   getWallpapers(params) {
     return new Promise((resolve, reject) => {
 
       // query
-      const query = Object.assign({}, this.options, params)
-      delete query.host
-      delete query.path
-      delete query.resolution
+      const mergeParmas = Object.assign({}, this.options, params)
+      const queryParams = {
+        n: mergeParmas.size,
+        idx: mergeParmas.day,
+        format: mergeParmas.format,
+        mkt: mergeParmas.local
+      }
 
       // options
-      const options = {
+      const requestOptions = {
         port: 443,
         method: 'GET',
-        host: DEFAULT_CONFIG.host,
-        path: DEFAULT_CONFIG.path + '?' + querystring.stringify(query),
+        host: this.options.host,
+        path: this.options.wallpaperApi + '?' + querystring.stringify(queryParams),
       }
 
       // request
-      const request = https.request(options, res => {
+      const request = https.request(requestOptions, res => {
         if (res.statusCode < 200 || res.statusCode >= 300) {
           return reject(new Error('statusCode=' + res.statusCode))
         }
         let body = []
         res.on('data', data => { body.push(data) })
         res.on('end', () => {
-          try {
-            const result = Buffer.concat(body).toString()
-            if (query.format === 'js') {
-              body = JSON.parse(result)
-            } else {
-              body = result
-            }
-          } catch(e) {
-            reject(e)
+          body = Buffer.concat(body).toString()
+          if (queryParams.format === 'js') {
+            body = JSON.parse(body)
           }
           resolve(body.images || body)
         })
@@ -85,28 +104,28 @@ class WonderfulBingWallpaper {
 
   /**
    * Get the humanize wallpapers by original wallpapers.
-   * @param {object} wallPaperJson - original wallpapers.
-   * @param {string} _resolution - wallpaper resolution.
+   * @param {object} wallpaperJson - original wallpapers.
+   * @param {string} resolution - wallpaper resolution.
    */
-  humanizeWallpapers(wallPaperJson, _resolution) {
-    const host = 'https://' + this.options.host
-    const resolution = _resolution || this.options.resolution
+  humanizeWallpapers(wallpaperJson, resolution) {
+    resolution = resolution || this.options.resolution
     const doHumanize = image => {
+      const host = 'https://' + this.options.host
       let fileFormat = (/\.[^\.]+$/.exec(image.url))
       fileFormat = fileFormat.length ? fileFormat[0] : '.jpg'
       return {
         title: image.title,
         copyright: image.copyright,
         copyrightlink: image.copyrightlink,
-        defaultUrl: `${host}${image.url}`,
         searchUrl: `${host}${image.quiz}`,
-        url: `${host}${image.urlbase}_${resolution}${fileFormat}`
+        defaultUrl: `${host}${image.url}`,
+        humanizeUrl: `${host}${image.urlbase}_${resolution}${fileFormat}`
       }
     }
-    if (wallPaperJson instanceof Array) {
-      return wallPaperJson.map(doHumanize)
+    if (wallpaperJson instanceof Array) {
+      return wallpaperJson.map(doHumanize)
     } else {
-      return doHumanize(wallPaperJson)
+      return doHumanize(wallpaperJson)
     }
   }
 }
@@ -133,17 +152,18 @@ WonderfulBingWallpaper.resolutions = [
 ]
 
 /**
- * Default config.
- * @return {Object} A default config.
+ * Default options.
+ * @return {Object} A default options.
  */
-const DEFAULT_CONFIG = {
-  n: 1,
-  idx: 0,
+const DEFAULT_OPTIONS = {
+  size: 1,
+  day: 0,
   format: 'js',
-  mkt: 'en-US',
+  local: 'en-US',
   host: 'www.bing.com',
-  path: '/HPImageArchive.aspx',
-  resolution: WonderfulBingWallpaper.resolutions[0]
+  storyApi: '/cnhp/coverstory/',
+  wallpaperApi: '/HPImageArchive.aspx',
+  resolution: WonderfulBingWallpaper.resolutions[1]
 }
 
 module.exports = WonderfulBingWallpaper
