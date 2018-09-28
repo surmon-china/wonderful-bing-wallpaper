@@ -58,7 +58,7 @@ wbw.getWallpapers(params).then(wallpaperJSON => {
 ### API
 
 #### `new WonderfulBingWallpaper(options?: object): instance` 
-#### `wba.setOptions(options?: object): instance`
+#### `wbw.setOptions(options?: object): instance`
 
 ##### return
 
@@ -86,7 +86,7 @@ wbw.getWallpapers(params).then(wallpaperJSON => {
 
 ---
 
-#### `wba.getWallpapers(params?: object): array`
+#### `wbw.getWallpapers(params?: object): array`
 
 ##### return
 
@@ -98,7 +98,7 @@ the same as [Options - recommended option field](/#Options)
 
 ---
 
-#### `wba.humanizeWallpapers(wallPapers: object | array, resolution?: string): array`
+#### `wbw.humanizeWallpapers(wallPapers: object | array, resolution?: string): array`
 
 ##### return
 
@@ -113,7 +113,7 @@ the same as [Options - recommended option field](/#Options)
 
 ---
 
-#### `wba.getTodayWallpaperStory(): object`
+#### `wbw.getTodayWallpaperStory(): object`
 
 ##### return
 
