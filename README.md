@@ -91,7 +91,7 @@ wbw.getTodayWallpaperStory(todayWallpaperStory => {
 
 @return wallpaper array
 
-the same as [Options - recommended option field](/##wbwsetoptionsoptions-object-instance)
+the same as [Options - recommended option field](#wbwsetoptionsoptions-object-instance)
 
 ---
 
