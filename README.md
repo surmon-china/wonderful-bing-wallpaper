@@ -65,11 +65,7 @@ wbw.getTodayWallpaperStory(todayWallpaperStory => {
 #### `new WonderfulBingWallpaper(options?: object): instance` 
 #### `wbw.setOptions(options?: object): instance`
 
-##### return
-
 @return `WonderfulBingWallpaper` instance
-
-##### options
 
 **recommended option field（推荐设置的字段）**
 
@@ -77,7 +73,7 @@ wbw.getTodayWallpaperStory(todayWallpaperStory => {
 |:----:|:--:|:------:|:-----:|----|
 |size  |`Number`|false|`1`| how many images - 几张图片 `size <= 8`|
 |day   |`Number`|false|`0`| how days before - 往前推几天 `day <= 7`|
-|format|`String`|false|`js`| result data format - 返回数据的格式 `js` | `xml` | `ssr` |
+|format|`String`|false|`js`| result data format - 返回数据的格式 `js`/`xml`/`ssr` |
 |local |`String`|false|`en-US`| your location - 你想拿到什么语言的版本（国内 `zh-CN`）|
 
 **not recommended option field（非必要情况不要设置的字段）**
@@ -93,23 +89,15 @@ wbw.getTodayWallpaperStory(todayWallpaperStory => {
 
 #### `wbw.getWallpapers(params?: object): array`
 
-##### return
-
 @return wallpaper array
 
-##### params
-
-the same as [Options - recommended option field](/#Options)
+the same as [Options - recommended option field](/##wbwsetoptionsoptions-object-instance)
 
 ---
 
 #### `wbw.humanizeWallpapers(wallPapers: object | array, resolution?: string): array`
 
-##### return
-
 @return humanize wallpaper array
-
-##### params
 
 |params|type|required|default|desc|
 |:----:|:--:|:------:|:-----:|----|
@@ -119,8 +107,6 @@ the same as [Options - recommended option field](/#Options)
 ---
 
 #### `wbw.getTodayWallpaperStory(): object`
-
-##### return
 
 @return wallpaper story object
 
