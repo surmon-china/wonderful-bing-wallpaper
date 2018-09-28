@@ -22,6 +22,11 @@
 
 [stackoverflow - Is there a way to get Bing's photo of the day?](https://stackoverflow.com/a/18096210/6222535) 
 
+### 实例
+
+[example.js](https://github.com/surmon-china/wonderful-bing-wallpaper/blob/master/examples/index.js)
+[onLine site - example](https://surmon.me)
+
 ### 怎么用
 
 ```bash
@@ -51,11 +56,12 @@ wbw.getWallpapers(params).then(wallpaperJSON => {
 
 ### API
 
-#### `new WonderfulBingWallpaper(options: object)` and `wba.setOptions(options: object)`
+#### `new WonderfulBingWallpaper(options: object): instance` 
+#### `wba.setOptions(options: object): instance`
 
 ##### return
 
-@return WonderfulBingWallpaper instance
+@return `WonderfulBingWallpaper` instance
 
 ##### options
 
@@ -79,7 +85,7 @@ wbw.getWallpapers(params).then(wallpaperJSON => {
 
 ---
 
-#### `wba.getWallpapers(params: object)`
+#### `wba.getWallpapers(params: object): array`
 
 ##### return
 
@@ -91,11 +97,11 @@ the same as [Options - recommended option field](/#Options)
 
 ---
 
-#### `wba.humanizeWallpapers(wallPapers: object | array, resolution: string)`
+#### `wba.humanizeWallpapers(wallPapers: object | array, resolution?: string): array`
 
 ##### return
 
-@return wallpaper array
+@return humanize wallpaper array
 
 ##### params
 
