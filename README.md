@@ -56,8 +56,8 @@ wbw.getWallpapers(params).then(wallpaperJSON => {
 
 ### API
 
-#### `new WonderfulBingWallpaper(options: object): instance` 
-#### `wba.setOptions(options: object): instance`
+#### `new WonderfulBingWallpaper(options?: object): instance` 
+#### `wba.setOptions(options?: object): instance`
 
 ##### return
 
@@ -85,7 +85,7 @@ wbw.getWallpapers(params).then(wallpaperJSON => {
 
 ---
 
-#### `wba.getWallpapers(params: object): array`
+#### `wba.getWallpapers(params?: object): array`
 
 ##### return
 
