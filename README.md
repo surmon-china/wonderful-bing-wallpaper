@@ -55,7 +55,7 @@ wbw.getWallpapers(params).then(wallpaperJSON => {
 })
 
 // get today wallpaper story
-wbw.getTodayWallpaperStory(todayWallpaperStory => {
+wbw.getTodayWallpaperStory().then(todayWallpaperStory => {
     console.log('todayWallpaperStory', todayWallpaperStory)
 })
 ```
