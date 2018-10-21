@@ -26,7 +26,7 @@
 
 [example.js](https://github.com/surmon-china/wonderful-bing-wallpaper/blob/master/examples/index.js)
 
-[onLine site - example](https://surmon.me)
+[Online site - example - 山河入梦](https://surmon.me)
 
 ### 怎么用
 
