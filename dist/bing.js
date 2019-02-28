@@ -46,7 +46,11 @@ var WonderfulBingWallpaper = function () {
             body.push(data);
           });
           res.on('end', function () {
-            return resolve(JSON.parse(Buffer.concat(body).toString()));
+            try {
+              resolve(JSON.parse(Buffer.concat(body).toString()));
+            } catch (error) {
+              reject(error);
+            }
           });
         });
         request.on('error', reject);
