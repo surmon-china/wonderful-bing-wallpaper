@@ -46,7 +46,13 @@ class WonderfulBingWallpaper {
         }
         let body = []
         res.on('data', data => { body.push(data) })
-        res.on('end', () => resolve(JSON.parse(Buffer.concat(body).toString())))
+        res.on('end', () => {
+          try {
+            resolve(JSON.parse(Buffer.concat(body).toString()))
+          } catch (error) {
+            reject(error)
+          }
+        })
       })
       request.on('error', reject)
       request.end()
