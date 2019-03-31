@@ -12,7 +12,7 @@
     "dev": "devtool examples/index.js --watch",
     "build": "babel src --out-dir dist",
     "finish": "npm run build && npm run test",
-    "publish": "git push && git push --tags && npm publish"
+    "publish:npm": "git push && git push --tags && npm publish"
   },
   "repository": {
     "type": "git",
