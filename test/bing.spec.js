@@ -30,20 +30,6 @@ describe('Test Class WonderfulBingWallpaper', () => {
     expect(resolutions[6]).to.equal('800x480')
   })
 
-  it('test getTodayWallpaperStory', done => {
-    wbw.getTodayWallpaperStory()
-      .then(data => {
-        const keys = Object.keys(data)
-        expect(keys.includes('title')).to.equal(true)
-        expect(keys.includes('Longitude')).to.equal(true)
-        expect(keys.includes('date')).to.equal(true)
-        done()
-      })
-      .catch(e => {
-        done(e)
-      })
-  })
-
   it('test getWallpapers', done => {
     wbw.getWallpapers()
       .then(data => {
