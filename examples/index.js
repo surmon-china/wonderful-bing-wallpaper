@@ -12,18 +12,11 @@ const wbw = new WonderfulBingWallpaper({
   day: 7,
   resolution: resolutions[2],  
   host: 'cn.bing.com',
-  local: 'zh-cn'
+  local: 'zh-cn',
 })
 
 console.log('wallPaper', wbw)
 console.log('\nwallPaper resolutions', resolutions, resolutions[3])
-
-// today wallpaper story
-wbw.getTodayWallpaperStory().then(todayWallpaperStory => {
-  console.group('todayWallpaperStory')
-  console.log('got todayWallpaperStory', todayWallpaperStory)
-  console.groupEnd()
-})
 
 // default json
 wbw.getWallpapers().then(wallpaperJSON => {
@@ -42,6 +35,16 @@ wbw.getWallpapers({ size: 10, day: 2 }).then(wallpaperJSON => {
   console.log('got wallpaperJSON-2 data', wallpaperJSON)
   console.log('got wallpaperJSON-2 humanizeWallpapers data', wbw.humanizeWallpapers(wallpaperJSON))
   console.log('got wallpaperJSON-2[0] humanizeWallpapers data\n', wbw.humanizeWallpapers(wallpaperJSON[0]))
+  console.groupEnd()
+})
+
+wbw.setOptions({ ensearch: 1 })
+
+// ensearch
+wbw.getWallpapers().then(wallpaperJSON => {
+  console.group('wallpaperJSON-3')
+  console.log('got wallpaperJSON-3 data', wallpaperJSON)
+  console.log('got wallpaperJSON-3 humanizeWallpapers data', wbw.humanizeWallpapers(wallpaperJSON))
   console.groupEnd()
 })
 

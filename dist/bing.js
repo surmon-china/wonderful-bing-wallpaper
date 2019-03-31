@@ -27,60 +27,31 @@ var WonderfulBingWallpaper = function () {
       return this;
     }
   }, {
-    key: 'getTodayWallpaperStory',
-    value: function getTodayWallpaperStory() {
+    key: 'getWallpapers',
+    value: function getWallpapers(params) {
       var _this = this;
 
       return new Promise(function (resolve, reject) {
-        var request = https.request({
-          port: 443,
-          method: 'GET',
-          host: _this.options.host,
-          path: _this.options.storyApi
-        }, function (res) {
-          if (res.statusCode < 200 || res.statusCode >= 300) {
-            return reject(new Error('statusCode=' + res.statusCode));
-          }
-          var body = [];
-          res.on('data', function (data) {
-            body.push(data);
-          });
-          res.on('end', function () {
-            try {
-              resolve(JSON.parse(Buffer.concat(body).toString()));
-            } catch (error) {
-              reject(error);
-            }
-          });
-        });
-        request.on('error', reject);
-        request.end();
-      });
-    }
-  }, {
-    key: 'getWallpapers',
-    value: function getWallpapers(params) {
-      var _this2 = this;
-
-      return new Promise(function (resolve, reject) {
-        var mergeParmas = Object.assign({}, _this2.options, params);
+        var mergeParmas = Object.assign({}, _this.options, params);
         var queryParams = {
           n: mergeParmas.size,
           idx: mergeParmas.day,
           format: mergeParmas.format,
-          mkt: mergeParmas.local
+          mkt: mergeParmas.local,
+          ensearch: mergeParmas.ensearch,
+          pid: 'hp'
         };
 
         var requestOptions = {
           port: 443,
           method: 'GET',
-          host: _this2.options.host,
-          path: _this2.options.wallpaperApi + '?' + querystring.stringify(queryParams)
+          host: _this.options.host,
+          path: _this.options.wallpaperApi + '?' + querystring.stringify(queryParams)
         };
 
         var request = https.request(requestOptions, function (res) {
           if (res.statusCode < 200 || res.statusCode >= 300) {
-            return reject(new Error('statusCode=' + res.statusCode));
+            return reject(new Error('WonderfulBingWallpaper getWallpapers error: statusCode=' + res.statusCode));
           }
           var body = [];
           res.on('data', function (data) {
@@ -102,16 +73,21 @@ var WonderfulBingWallpaper = function () {
   }, {
     key: 'humanizeWallpapers',
     value: function humanizeWallpapers(wallpaperJson, resolution) {
-      var _this3 = this;
+      var _this2 = this;
 
       resolution = resolution || this.options.resolution;
       var doHumanize = function doHumanize(image) {
-        var host = 'https://' + _this3.options.host;
+        var host = 'https://' + _this2.options.host;
         var fileFormat = /\.[^\.]+$/.exec(image.url);
         fileFormat = fileFormat.length ? fileFormat[0] : '.jpg';
         return {
           title: image.title,
+          bsTitle: image.bsTitle,
+          caption: image.caption,
+          desc: image.desc,
+          date: image.date,
           copyright: image.copyright,
+          copyrightonly: image.copyrightonly,
           copyrightlink: image.copyrightlink,
           searchUrl: '' + host + image.quiz,
           defaultUrl: '' + host + image.url,
@@ -135,9 +111,9 @@ var DEFAULT_OPTIONS = {
   size: 1,
   day: 0,
   format: 'js',
+  ensearch: 0,
   local: 'en-US',
   host: 'www.bing.com',
-  storyApi: '/cnhp/coverstory/',
   wallpaperApi: '/HPImageArchive.aspx',
   resolution: WonderfulBingWallpaper.resolutions[1]
 };

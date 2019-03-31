@@ -53,11 +53,6 @@ wbw.getWallpapers(params).then(wallpaperJSON => {
   console.log('got humanizeWallpapers data - Array', wbw.humanizeWallpapers(wallpaperJSON))
   console.log('got humanizeWallpapers data - Object', wbw.humanizeWallpapers(wallpaperJSON[0]))
 })
-
-// get today wallpaper story
-wbw.getTodayWallpaperStory().then(todayWallpaperStory => {
-    console.log('todayWallpaperStory', todayWallpaperStory)
-})
 ```
 
 ### API
@@ -80,9 +75,9 @@ wbw.getTodayWallpaperStory().then(todayWallpaperStory => {
 
 |params|type|required|default|desc|
 |:----:|:--:|:------:|:-----:|----|
+|ensearch|`number`|false|0| `0 | 1` <br> 1 则查询全量数据，包括如图片描述、故事、封面文字...开启后会被强制切换为全英文（实际 bing 拿的美版数据）|
 |host  |`String`|false|`www.bing.com`| bing wallpaper api host <br> 你想在哪个服务器拿数据（国内 `cn.bing.com`）|
 |wallpaperApi|`String`|false|`/HPImageArchive.aspx`| bing wallpaper api path <br> 如果哪天 Bing 改接口了你可以手动设置一下|
-|storyApi|`String`|false|`/cnhp/coverstory/`| bing wallpaper story api path <br>  今日壁纸故事 API，只能获取今天|
 |resolution|`String`|false|`1920x1200`| `humanizeWallpapers` second param default resolution <br> 使用 `humanizeWallpapers` 方法时第二参数的默认值|
 
 ---
@@ -103,12 +98,6 @@ the same as [Options - recommended option field](#wbwsetoptionsoptions-object-in
 |:----:|:--:|:------:|:-----:|----|
 |wallPapers|`Array/Object`|true|`null`| wallpaper images <br> 图片或多张图片|
 |resolution|`String`|false|`{instance}.options.resolution`| wallpaper resolution <br> 要输出的图片地址里的分辨率|
-
----
-
-#### `wbw.getTodayWallpaperStory(): object`
-
-@return wallpaper story object
 
 ---
 

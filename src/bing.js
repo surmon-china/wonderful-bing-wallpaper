@@ -31,35 +31,6 @@ class WonderfulBingWallpaper {
   }
 
   /**
-   * Get daily wallpapers story.
-   */
-  getTodayWallpaperStory() {
-    return new Promise((resolve, reject) => {
-      const request = https.request({
-        port: 443,
-        method: 'GET',
-        host: this.options.host,
-        path: this.options.storyApi
-      }, res => {
-        if (res.statusCode < 200 || res.statusCode >= 300) {
-          return reject(new Error('statusCode=' + res.statusCode))
-        }
-        let body = []
-        res.on('data', data => { body.push(data) })
-        res.on('end', () => {
-          try {
-            resolve(JSON.parse(Buffer.concat(body).toString()))
-          } catch (error) {
-            reject(error)
-          }
-        })
-      })
-      request.on('error', reject)
-      request.end()
-    })
-  }
-
-  /**
    * Get the wallpapers by params.
    * @param {params} size - wallpapers size.
    * @param {params} day - Before days.
@@ -75,7 +46,9 @@ class WonderfulBingWallpaper {
         n: mergeParmas.size,
         idx: mergeParmas.day,
         format: mergeParmas.format,
-        mkt: mergeParmas.local
+        mkt: mergeParmas.local,
+        ensearch: mergeParmas.ensearch,
+        pid: 'hp'
       }
 
       // options
@@ -86,10 +59,11 @@ class WonderfulBingWallpaper {
         path: this.options.wallpaperApi + '?' + querystring.stringify(queryParams),
       }
 
+
       // request
       const request = https.request(requestOptions, res => {
         if (res.statusCode < 200 || res.statusCode >= 300) {
-          return reject(new Error('statusCode=' + res.statusCode))
+          return reject(new Error('WonderfulBingWallpaper getWallpapers error: statusCode=' + res.statusCode))
         }
         let body = []
         res.on('data', data => { body.push(data) })
@@ -121,7 +95,12 @@ class WonderfulBingWallpaper {
       fileFormat = fileFormat.length ? fileFormat[0] : '.jpg'
       return {
         title: image.title,
+        bsTitle: image.bsTitle,
+        caption: image.caption,
+        desc: image.desc,
+        date: image.date,
         copyright: image.copyright,
+        copyrightonly: image.copyrightonly,
         copyrightlink: image.copyrightlink,
         searchUrl: `${host}${image.quiz}`,
         defaultUrl: `${host}${image.url}`,
@@ -165,9 +144,9 @@ const DEFAULT_OPTIONS = {
   size: 1,
   day: 0,
   format: 'js',
+  ensearch: 0,
   local: 'en-US',
   host: 'www.bing.com',
-  storyApi: '/cnhp/coverstory/',
   wallpaperApi: '/HPImageArchive.aspx',
   resolution: WonderfulBingWallpaper.resolutions[1]
 }
