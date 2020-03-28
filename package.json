@@ -1,23 +1,7 @@
 {
   "name": "wonderful-bing-wallpaper",
-  "version": "0.2.1",
-  "description": "A simple bing daily wallpaper api lib",
-  "main": "dist/bing.js",
-  "bugs": {
-    "url": "https://github.com/surmon-china/wonderful-bing-wallpaper/issues"
-  },
-  "homepage": "https://github.com/surmon-china/wonderful-bing-wallpaper#readme",
-  "scripts": {
-    "test": "mocha",
-    "dev": "devtool examples/index.js --watch",
-    "build": "babel src --out-dir dist",
-    "finish": "npm run build && npm run test",
-    "publish:npm": "git push && git push --tags && npm publish"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/surmon-china/wonderful-bing-wallpaper.git"
-  },
+  "version": "0.3.0",
+  "description": "Simple bing daily wallpaper API lib for node.js",
   "keywords": [
     "bing",
     "bing wallpaper",
@@ -29,27 +13,38 @@
   "author": {
     "name": "Surmon",
     "email": "surmon@foxmail.com",
-    "url": "https://surmon.me"
+    "url": "https://github.com/surmon-china"
+  },
+  "bugs": {
+    "url": "https://github.com/surmon-china/wonderful-bing-wallpaper/issues"
+  },
+  "homepage": "https://github.com/surmon-china/wonderful-bing-wallpaper#readme",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/surmon-china/wonderful-bing-wallpaper.git"
+  },
+  "main": "dist/bing.cjs.js",
+  "module": "dist/bing.esm.js",
+  "files": [
+    "src",
+    "dist",
+    "types"
+  ],
+  "types": "types/bing.d.ts",
+  "scripts": {
+    "dev": "node dev/index.js",
+    "cleanup": "rm -rf ./dist/* && rm -rf ./types/*",
+    "build": "npm run cleanup && abc build",
+    "lint": "abc lint --ext .ts,.js src test",
+    "test": "abc test",
+    "rebirth": "npm run lint && npm run test && npm run build"
   },
   "private": false,
   "license": "MIT",
   "devDependencies": {
-    "babel-cli": "^6.26.0",
-    "babel-core": "^6.26.3",
-    "babel-eslint": "^10.0.0",
-    "babel-helper-vue-jsx-merge-props": "^2.0.3",
-    "babel-loader": "^8.0.2",
-    "babel-plugin-istanbul": "^5.0.1",
-    "babel-plugin-syntax-jsx": "^6.18.0",
-    "babel-plugin-transform-es2015-destructuring": "^6.23.0",
-    "babel-plugin-transform-export-extensions": "^6.22.0",
-    "babel-plugin-transform-object-rest-spread": "^6.26.0",
-    "babel-plugin-transform-runtime": "^6.23.0",
-    "babel-preset-es2015": "^6.24.1",
-    "babel-preset-stage-2": "^6.24.1",
-    "babel-register": "^6.26.0",
-    "chai": "^4.2.0",
-    "mocha": "^5.2.0",
-    "xml2js": "^0.4.19"
+    "@surmon-china/abc-factory": "^0.3.2",
+    "@types/node": "^12.12.31",
+    "typescript": "^3.8.3"
   }
 }
+
