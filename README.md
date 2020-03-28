@@ -10,7 +10,7 @@
 [![NPM](https://nodei.co/npm/wonderful-bing-wallpaper.png?downloads=true&downloadRank=true&stars=true)](https://nodei.co/npm/wonderful-bing-wallpaper/)
 
 
-🌅A simple bing daily wallpaper api lib. 极简的 Node.js 版必应壁纸 API 库。
+🌅 Simple bing daily wallpaper API lib for Node.js. 极简的 Node.js 版必应壁纸 API 库。
 
 - 简单：**1 个接口**
 - 稳定：**与 Bing 同在**
