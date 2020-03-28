@@ -53,7 +53,7 @@ const DEFAULT_OPTIONS = Object.freeze({
   resolution: RESOLUTIONS[1]
 })
 
-type WonderfulBingWallpaperOption = Partial<typeof DEFAULT_OPTIONS>
+export type WonderfulBingWallpaperOption = Partial<typeof DEFAULT_OPTIONS>
 
 export default class WonderfulBingWallpaper {
 

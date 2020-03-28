@@ -2,6 +2,12 @@
 # Changelog
 All notable changes to this project will be documented in this file.
 
+### v0.3.4
+
+**Update**
+- export interfaces
+- `minimize` to `true`
+
 ### v0.3.3
 
 **Update**
