@@ -1,32 +1,29 @@
-[![GitHub stars](https://img.shields.io/github/stars/surmon-china/wonderful-bing-wallpaper.svg?style=flat-square)](https://github.com/surmon-china/wonderful-bing-wallpaper/stargazers)
-[![Build Status](https://travis-ci.org/surmon-china/wonderful-bing-wallpaper.svg?branch=master)](https://travis-ci.org/surmon-china/wonderful-bing-wallpaper)
-[![GitHub issues](https://img.shields.io/github/issues/surmon-china/wonderful-bing-wallpaper.svg?style=flat-square)](https://github.com/surmon-china/wonderful-bing-wallpaper/issues)
-[![GitHub forks](https://img.shields.io/github/forks/surmon-china/wonderful-bing-wallpaper.svg?style=flat-square)](https://github.com/surmon-china/wonderful-bing-wallpaper/network)
-[![GitHub last commit](https://img.shields.io/github/last-commit/google/skia.svg?style=flat-square)](https://github.com/surmon-china/wonderful-bing-wallpaper)
-[![license](https://img.shields.io/github/license/mashape/apistatus.svg?style=flat-square)](https://github.com/surmon-china/wonderful-bing-wallpaper)
-[![Twitter](https://img.shields.io/twitter/url/https/github.com/surmon-china/wonderful-bing-wallpaper.svg?style=flat-square)](https://twitter.com/intent/tweet?url=https://github.com/surmon-china/wonderful-bing-wallpaper)
-[![](https://badge.juejin.im/entry/5946b695128fe1006a48643f/likes.svg?style=flat-square)](https://juejin.im/entry/5946b695128fe1006a48643f/detail)
+# wonderful-bing-wallpaper
+
+[![GitHub stars](https://img.shields.io/github/stars/surmon-china/wonderful-bing-wallpaper.svg?style=for-the-badge)](https://github.com/surmon-china/wonderful-bing-wallpaper/stargazers)
+[![npm](https://img.shields.io/npm/v/wonderful-bing-wallpaper?color=%23c7343a&label=npm&style=for-the-badge)](https://www.npmjs.com/package/wonderful-bing-wallpaper)
+[![GitHub issues](https://img.shields.io/github/issues-raw/surmon-china/wonderful-bing-wallpaper.svg?style=for-the-badge)](https://github.com/surmon-china/wonderful-bing-wallpaper/issues)
+[![GitHub last commit](https://img.shields.io/github/last-commit/surmon-china/wonderful-bing-wallpaper.svg?style=for-the-badge)](https://github.com/surmon-china/wonderful-bing-wallpaper)
+[![license](https://img.shields.io/github/license/mashape/apistatus.svg?style=for-the-badge)](https://github.com/surmon-china/wonderful-bing-wallpaper/blob/master/LICENSE)
+
 
 [![NPM](https://nodei.co/npm/wonderful-bing-wallpaper.png?downloads=true&downloadRank=true&stars=true)](https://nodei.co/npm/wonderful-bing-wallpaper/)
-[![NPM](https://nodei.co/npm-dl/wonderful-bing-wallpaper.png?months=9&height=3)](https://nodei.co/npm/wonderful-bing-wallpaper/)
 
-### wonderful-bing-wallpaper
 
 🌅A simple bing daily wallpaper api lib. 极简的 Node.js 版必应壁纸 API 库。
 
-- 简单：1 个接口
-- 稳定：与 Bing 同在
-- 轻巧：不依赖任何第三方
+- 简单：**1 个接口**
+- 稳定：**与 Bing 同在**
+- 轻巧：**不依赖任何第三方**
 
-### 贡献者
+### 参考
 
 [stackoverflow - Is there a way to get Bing's photo of the day?](https://stackoverflow.com/a/18096210/6222535) 
 
 ### 实例
 
-[example.js](https://github.com/surmon-china/wonderful-bing-wallpaper/blob/master/examples/index.js)
-
-[Online site - example - 山河入梦](https://surmon.me)
+- [Example code](https://github.com/surmon-china/wonderful-bing-wallpaper/blob/master/dev/index.js)
+- [Online site example - 山河入梦](https://surmon.me)
 
 ### 怎么用
 
@@ -35,20 +32,19 @@ npm i wonderful-bing-wallpaper --save
 ```
 
 ```javascript
-// require
 const WonderfulBingWallpaper = require('wonderful-bing-wallpaper')
 
 // get support resolutions list
-const resolutions = WonderfulBingWallpaper.resolutions
+const resolutions = WonderfulBingWallpaper.getResolutions()
 
 // instance
-const wbw = new WonderfulBingWallpaper(options)
+const wbw = new WonderfulBingWallpaper({ /* options */ })
 
 // update default options
-wbw.setOptions(options)
+wbw.setOptions({ /* options */ })
 
 // get daily wallpapers
-wbw.getWallpapers(params).then(wallpaperJSON => {
+wbw.getWallpapers({ /* params */ }).then(wallpaperJSON => {
   console.log('got wallpaperJSON data', wallpaperJSON)
   console.log('got humanizeWallpapers data - Array', wbw.humanizeWallpapers(wallpaperJSON))
   console.log('got humanizeWallpapers data - Object', wbw.humanizeWallpapers(wallpaperJSON[0]))
@@ -58,7 +54,7 @@ wbw.getWallpapers(params).then(wallpaperJSON => {
 ### API
 
 #### `new WonderfulBingWallpaper(options?: object): instance` 
-#### `wbw.setOptions(options?: object): instance`
+#### `wbw.setOptions(options?: object)`
 
 @return `WonderfulBingWallpaper` instance
 
@@ -90,9 +86,9 @@ the same as [Options - recommended option field](#wbwsetoptionsoptions-object-in
 
 ---
 
-#### `wbw.humanizeWallpapers(wallPapers: object | array, resolution?: string): array`
+#### `wbw.humanizeWallpapers(wallPapers: object | array, resolution?: string): object | array`
 
-@return humanize wallpaper array
+@return humanize wallpaper
 
 |params|type|required|default|desc|
 |:----:|:--:|:------:|:-----:|----|
@@ -104,13 +100,14 @@ the same as [Options - recommended option field](#wbwsetoptionsoptions-object-in
 ### 测试执行
 
 ```
-npm i
-npm run dev
+yarn
+yarn dev
+yarn lint
+yarn test
+yarn build
 npm run test
 ```
 
+### License
 
-### Author
-
-[Surmon](https://surmon.me)
-
+[MIT](https://github.com/surmon-china/wonderful-bing-wallpaper/blob/master/LICENSE)
