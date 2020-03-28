@@ -142,6 +142,7 @@ export default class WonderfulBingWallpaper {
       const targetFileFormat = fileFormat?.length ? fileFormat?.[0] : '.jpg'
       return {
         ...image,
+        humanizedCopyrightUrl: `${host}${image.copyrightlink}`,
         humanizedSearchUrl: `${host}${image.quiz}`,
         humanizedImageUrl: `${host}${image.url}`,
         humanizeResolutionUrl: `${host}${image.urlbase}_${targetResolution}${targetFileFormat}`

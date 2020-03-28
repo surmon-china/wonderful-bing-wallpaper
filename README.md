@@ -93,6 +93,7 @@ the same as option fields.
 ```ts
 {
   ...wallpaper,
+  humanizedCopyrightUrl: string,
   humanizedSearchUrl: string,
   humanizedImageUrl: string,
   humanizeResolutionUrl: string
