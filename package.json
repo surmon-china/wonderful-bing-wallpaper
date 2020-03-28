@@ -1,6 +1,6 @@
 {
   "name": "wonderful-bing-wallpaper",
-  "version": "0.3.2",
+  "version": "0.3.3",
   "description": "Simple bing daily wallpaper API lib for node.js",
   "keywords": [
     "bing",
