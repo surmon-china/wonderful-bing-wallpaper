@@ -16,16 +16,16 @@
 - 稳定：**与 Bing 同在**
 - 轻巧：**不依赖任何第三方**
 
-### 参考
+### Credit
 
 [stackoverflow - Is there a way to get Bing's photo of the day?](https://stackoverflow.com/a/18096210/6222535) 
 
-### 实例
+### Example
 
 - [Example code](https://github.com/surmon-china/wonderful-bing-wallpaper/blob/master/dev/index.js)
 - [Online site example - 山河入梦](https://surmon.me)
 
-### 怎么用
+### Usage
 
 ```bash
 npm i wonderful-bing-wallpaper --save
@@ -106,7 +106,7 @@ the same as option fields.
 
 ---
 
-### 测试执行
+### Dev
 
 ```
 yarn
