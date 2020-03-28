@@ -17,7 +17,6 @@ declare const DEFAULT_OPTIONS: Readonly<{
     resolution: string;
 }>;
 declare type WonderfulBingWallpaperOption = Partial<typeof DEFAULT_OPTIONS>;
-declare type GetWallpapersParams = Pick<WonderfulBingWallpaperOption, 'size' | 'day' | 'local' | 'format'>;
 export default class WonderfulBingWallpaper {
     options: WonderfulBingWallpaperOption;
     constructor(options?: WonderfulBingWallpaperOption);
@@ -33,7 +32,7 @@ export default class WonderfulBingWallpaper {
      * @param {params} local - The location.
      * @param {params} format - The result doc format.
      */
-    getWallpapers(params?: GetWallpapersParams): any;
+    getWallpapers(params?: WonderfulBingWallpaperOption): any;
     /**
      * Get the humanize wallpapers by original wallpapers.
      * @param {object} wallpaperJson - original wallpapers.

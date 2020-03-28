@@ -54,7 +54,6 @@ const DEFAULT_OPTIONS = Object.freeze({
 })
 
 type WonderfulBingWallpaperOption = Partial<typeof DEFAULT_OPTIONS>
-type GetWallpapersParams = Pick<WonderfulBingWallpaperOption, 'size' | 'day' | 'local' | 'format'>
 
 export default class WonderfulBingWallpaper {
 
@@ -82,7 +81,7 @@ export default class WonderfulBingWallpaper {
    * @param {params} local - The location.
    * @param {params} format - The result doc format.
    */
-  getWallpapers(params?: GetWallpapersParams): any {
+  getWallpapers(params?: WonderfulBingWallpaperOption): any {
     return new Promise((resolve, reject) => {
       // params
       const mergeParmas = {
