@@ -82,13 +82,22 @@ wbw.getWallpapers({ /* params */ }).then(wallpaperJSON => {
 
 @return wallpaper array
 
-the same as [Options - recommended option field](#wbwsetoptionsoptions-object-instance)
+the same as option fields.
 
 ---
 
 #### `wbw.humanizeWallpapers(wallPapers: object | array, resolution?: string): object | array`
 
-@return humanize wallpaper
+@return humanized wallpaper data.
+
+```ts
+{
+  ...wallpaper,
+  humanizedSearchUrl: string,
+  humanizedImageUrl: string,
+  humanizeResolutionUrl: string
+}
+```
 
 |params|type|required|default|desc|
 |:----:|:--:|:------:|:-----:|----|
