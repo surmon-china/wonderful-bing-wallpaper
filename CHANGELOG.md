@@ -11,7 +11,7 @@ All notable changes to this project will be documented in this file.
 
 **Breaking change**
 - Move `static resolutions` to `static getResolutions()`
-- `humanizeWallpapers` return `{ ...wallpaper, humanizedSearchUrl, humanizedImageUrl, humanizeResolutionUrl }`
+- `humanizeWallpapers` return `{ ...wallpaper, humanizedSearchUrl, humanizedImageUrl, humanizedResolutionUrl }`
 
 **Update**
 - Refactoring with TypeScript

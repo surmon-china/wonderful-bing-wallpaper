@@ -1,6 +1,6 @@
 {
   "name": "wonderful-bing-wallpaper",
-  "version": "0.3.1",
+  "version": "0.3.2",
   "description": "Simple bing daily wallpaper API lib for node.js",
   "keywords": [
     "bing",
@@ -37,7 +37,8 @@
     "build": "npm run cleanup && abc build",
     "lint": "abc lint --ext .ts,.js src test",
     "test": "abc test",
-    "rebirth": "npm run lint && npm run test && npm run build"
+    "rebirth": "npm run lint && npm run test && npm run build",
+    "release": ". ./scripts/release.sh"
   },
   "private": false,
   "license": "MIT",

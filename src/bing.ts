@@ -145,7 +145,7 @@ export default class WonderfulBingWallpaper {
         humanizedCopyrightUrl: `${host}${image.copyrightlink}`,
         humanizedSearchUrl: `${host}${image.quiz}`,
         humanizedImageUrl: `${host}${image.url}`,
-        humanizeResolutionUrl: `${host}${image.urlbase}_${targetResolution}${targetFileFormat}`
+        humanizedResolutionUrl: `${host}${image.urlbase}_${targetResolution}${targetFileFormat}`
       }
     }
 

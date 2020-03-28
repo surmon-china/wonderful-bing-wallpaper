@@ -96,7 +96,7 @@ the same as option fields.
   humanizedCopyrightUrl: string,
   humanizedSearchUrl: string,
   humanizedImageUrl: string,
-  humanizeResolutionUrl: string
+  humanizedResolutionUrl: string
 }
 ```
 
