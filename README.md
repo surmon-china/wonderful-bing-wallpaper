@@ -1,16 +1,16 @@
 # wonderful-bing-wallpaper
 
 [![GitHub stars](https://img.shields.io/github/stars/surmon-china/wonderful-bing-wallpaper.svg?style=for-the-badge)](https://github.com/surmon-china/wonderful-bing-wallpaper/stargazers)
+&nbsp;
 [![npm](https://img.shields.io/npm/v/wonderful-bing-wallpaper?color=%23c7343a&label=npm&style=for-the-badge)](https://www.npmjs.com/package/wonderful-bing-wallpaper)
+&nbsp;
 [![GitHub issues](https://img.shields.io/github/issues-raw/surmon-china/wonderful-bing-wallpaper.svg?style=for-the-badge)](https://github.com/surmon-china/wonderful-bing-wallpaper/issues)
+&nbsp;
 [![GitHub last commit](https://img.shields.io/github/last-commit/surmon-china/wonderful-bing-wallpaper.svg?style=for-the-badge)](https://github.com/surmon-china/wonderful-bing-wallpaper)
+&nbsp;
 [![license](https://img.shields.io/github/license/mashape/apistatus.svg?style=for-the-badge)](https://github.com/surmon-china/wonderful-bing-wallpaper/blob/master/LICENSE)
 
-
-[![NPM](https://nodei.co/npm/wonderful-bing-wallpaper.png?downloads=true&downloadRank=true&stars=true)](https://nodei.co/npm/wonderful-bing-wallpaper/)
-
-
-🌅 Simple bing daily wallpaper API lib for Node.js. 极简的 Node.js 版必应壁纸 API 库。
+🌅 Simple Bing daily wallpaper API lib for Node.js. 极简的 Node.js 版必应壁纸 API 库。
 
 - 简单：**1 个接口**
 - 稳定：**与 Bing 同在**
@@ -22,8 +22,8 @@
 
 ### Example
 
-- [Example code](https://github.com/surmon-china/wonderful-bing-wallpaper/blob/master/dev/index.js)
-- [Online site example - 山河入梦](https://surmon.me)
+- [example code](https://github.com/surmon-china/wonderful-bing-wallpaper/blob/master/dev/index.js)
+- [online site example](https://surmon.me)
 
 ### Usage
 
@@ -105,7 +105,6 @@ the same as option fields.
 |wallPapers|`Array/Object`|true|`null`| wallpaper images <br> 图片或多张图片|
 |resolution|`String`|false|`{instance}.options.resolution`| wallpaper resolution <br> 要输出的图片地址里的分辨率|
 
----
 
 ### Dev
 
