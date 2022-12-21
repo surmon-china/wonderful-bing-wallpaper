@@ -1,12 +1,10 @@
 # wonderful-bing-wallpaper
 
-[![GitHub stars](https://img.shields.io/github/stars/surmon-china/wonderful-bing-wallpaper.svg?style=for-the-badge)](https://github.com/surmon-china/wonderful-bing-wallpaper/stargazers)
-&nbsp;
 [![npm](https://img.shields.io/npm/v/wonderful-bing-wallpaper?color=%23c7343a&label=npm&style=for-the-badge)](https://www.npmjs.com/package/wonderful-bing-wallpaper)
 &nbsp;
-[![GitHub issues](https://img.shields.io/github/issues-raw/surmon-china/wonderful-bing-wallpaper.svg?style=for-the-badge)](https://github.com/surmon-china/wonderful-bing-wallpaper/issues)
+[![GitHub stars](https://img.shields.io/github/stars/surmon-china/wonderful-bing-wallpaper.svg?style=for-the-badge)](https://github.com/surmon-china/wonderful-bing-wallpaper/stargazers)
 &nbsp;
-[![GitHub last commit](https://img.shields.io/github/last-commit/surmon-china/wonderful-bing-wallpaper.svg?style=for-the-badge)](https://github.com/surmon-china/wonderful-bing-wallpaper)
+[![GitHub issues](https://img.shields.io/github/issues-raw/surmon-china/wonderful-bing-wallpaper.svg?style=for-the-badge)](https://github.com/surmon-china/wonderful-bing-wallpaper/issues)
 &nbsp;
 [![license](https://img.shields.io/github/license/mashape/apistatus.svg?style=for-the-badge)](/LICENSE)
 
